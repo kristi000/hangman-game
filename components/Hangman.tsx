@@ -11,6 +11,9 @@ const Hangman = () => {
   const incorrectLetters = guessedLetters.filter(
     (letter) => !toGuessWord.includes(letter)
   )
+  const correctLetters = guessedLetters.filter((letter) =>
+    toGuessWord.includes(letter)
+  )
 
   const addGuessedLetter = (letter: string) => {
     setGuessedLetters([...guessedLetters, letter])
@@ -20,7 +23,11 @@ const Hangman = () => {
   return (
     <div className="flex flex-col items-center">
       <Word toGuessWord={toGuessWord} guessedLetters={guessedLetters} />
-      <Keyboard addGuessedLetter={addGuessedLetter} />
+      <Keyboard
+        addGuessedLetter={addGuessedLetter}
+        incorrectLetters={incorrectLetters}
+        correctLetters={correctLetters}
+      />
     </div>
   )
 }

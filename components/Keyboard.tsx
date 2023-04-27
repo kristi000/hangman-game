@@ -7,9 +7,15 @@ const keyboardLetters = [
 
 type keyboardProps = {
   addGuessedLetter: (letter: string) => void
+  incorrectLetters: string[]
+  correctLetters: string[]
 }
 
-const Keyboard = ({ addGuessedLetter }: keyboardProps) => {
+const Keyboard = ({
+  addGuessedLetter,
+  correctLetters,
+  incorrectLetters,
+}: keyboardProps) => {
   const handleLetterClick = (letter: string) => {
     console.log(letter)
     addGuessedLetter(letter)
@@ -17,18 +23,31 @@ const Keyboard = ({ addGuessedLetter }: keyboardProps) => {
 
   return (
     <div className="max-w-xl">
-      {keyboardLetters.map((letter) => (
-        <div className="flex justify-center">
-          {letter.map((letter) => (
-            <button
-              onClick={() => handleLetterClick(letter)}
-              className="keyboard-btn"
-            >
-              {letter}
-            </button>
-          ))}
-        </div>
-      ))}
+      {keyboardLetters.map((letter) => {
+        return (
+          <div className="flex justify-center">
+            {letter.map((letter) => {
+              const isCorrect = correctLetters.includes(letter)
+              const isIncorrect = incorrectLetters.includes(letter)
+              const isDisabled = isCorrect || isIncorrect
+              return (
+                <button
+                  onClick={() => handleLetterClick(letter)}
+                  className={`keyboard-btn sdsdsanjdsdsds ${
+                    isDisabled ? "" : "active:scale-75"
+                  }
+                  ${isCorrect ? "bg-green-400" : ""}
+                  ${isIncorrect ? "bg-gray-500" : ""}
+                  `}
+                  disabled={isDisabled}
+                >
+                  {letter}
+                </button>
+              )
+            })}
+          </div>
+        )
+      })}
     </div>
   )
 }
