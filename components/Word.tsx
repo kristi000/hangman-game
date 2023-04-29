@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 type wordProps = {
   toGuessWord: string
@@ -7,6 +7,7 @@ type wordProps = {
 
 const Word = ({ toGuessWord, guessedLetters }: wordProps) => {
   console.log(toGuessWord)
+
   const toGuessWordArray = toGuessWord.split("")
 
   return (
@@ -14,6 +15,7 @@ const Word = ({ toGuessWord, guessedLetters }: wordProps) => {
       {toGuessWordArray.map((letter) => {
         return (
           <div
+            key={letter + Math.random()}
             className={`bg-slate-600 text-white text-2xl uppercase w-10 h-10 rounded-md flex justify-center items-center m-2`}
           >
             {guessedLetters.includes(letter) ? letter : ""}

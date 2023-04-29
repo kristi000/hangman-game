@@ -1,38 +1,41 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Word from "./Word"
 import Keyboard from "./Keyboard"
 import words from "./wordList.json"
 
-function randomWord() {
-  return words[Math.floor(Math.random() * words.length)]
-}
-
 const Hangman = () => {
-  const [toGuessWord, setToGuessWord] = useState<string>(randomWord)
+  const [toGuessWord, setToGuessWord] = useState<string>("hello")
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
+
+  console.log(toGuessWord)
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !toGuessWord.includes(letter)
   )
+
   const correctLetters = guessedLetters.filter((letter) =>
     toGuessWord.includes(letter)
   )
 
   const addGuessedLetter = (letter: string) => {
     setGuessedLetters([...guessedLetters, letter])
-    console.log(guessedLetters)
   }
 
   return (
     <div className="flex flex-col items-center">
       <Word toGuessWord={toGuessWord} guessedLetters={guessedLetters} />
-      <Keyboard
-        addGuessedLetter={addGuessedLetter}
-        incorrectLetters={incorrectLetters}
-        correctLetters={correctLetters}
-      />
+
+      {toGuessWord ? (
+        <Keyboard
+          addGuessedLetter={addGuessedLetter}
+          incorrectLetters={incorrectLetters}
+          correctLetters={correctLetters}
+        />
+      ) : (
+        <div>loading...</div>
+      )}
     </div>
   )
 }

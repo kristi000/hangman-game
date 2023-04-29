@@ -25,13 +25,14 @@ const Keyboard = ({
     <div className="max-w-xl">
       {keyboardLetters.map((letter) => {
         return (
-          <div className="flex justify-center">
+          <div className="flex justify-center" key={Math.random()}>
             {letter.map((letter) => {
               const isCorrect = correctLetters.includes(letter)
               const isIncorrect = incorrectLetters.includes(letter)
               const isDisabled = isCorrect || isIncorrect
               return (
                 <button
+                  key={letter}
                   onClick={() => handleLetterClick(letter)}
                   className={`keyboard-btn sdsdsanjdsdsds ${
                     isDisabled ? "" : "active:scale-75"
