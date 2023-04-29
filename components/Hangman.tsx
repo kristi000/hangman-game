@@ -6,10 +6,17 @@ import Keyboard from "./Keyboard"
 import words from "./wordList.json"
 
 const Hangman = () => {
-  const [toGuessWord, setToGuessWord] = useState<string>("hello")
+  const [toGuessWord, setToGuessWord] = useState<string>("")
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
+  const [isWin, setIsWin] = useState<boolean>(false)
+  console.log(isWin)
+  function randomWord() {
+    return words[Math.floor(Math.random() * words.length)]
+  }
 
-  console.log(toGuessWord)
+  useEffect(() => {
+    setToGuessWord(randomWord())
+  }, [])
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !toGuessWord.includes(letter)
@@ -23,6 +30,21 @@ const Hangman = () => {
     setGuessedLetters([...guessedLetters, letter])
   }
 
+  useEffect(() => {
+    if (toGuessWord === correctLetters.join("")) {
+      setIsWin(true)
+      checkHasWon()
+    }
+  }, [correctLetters])
+
+  const checkHasWon = () => {
+    if (isWin === true) {
+      console.log("fitove karin")
+      setIsWin(false)
+      setToGuessWord(randomWord())
+      setGuessedLetters([])
+    }
+  }
   return (
     <div className="flex flex-col items-center">
       <Word toGuessWord={toGuessWord} guessedLetters={guessedLetters} />
