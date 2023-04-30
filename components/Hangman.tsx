@@ -31,14 +31,15 @@ const Hangman = () => {
   }
 
   useEffect(() => {
-    if (toGuessWord === correctLetters.join("")) {
+    if (
+      toGuessWord.split("").every((letter) => correctLetters.includes(letter))
+    ) {
       setIsWin(true)
-      checkHasWon()
     }
-  }, [correctLetters])
+  }, [guessedLetters])
 
   const checkHasWon = () => {
-    if (isWin === true) {
+    if (isWin) {
       console.log("fitove karin")
       setIsWin(false)
       setToGuessWord(randomWord())
@@ -58,6 +59,7 @@ const Hangman = () => {
       ) : (
         <div>loading...</div>
       )}
+      <button onClick={checkHasWon}>Reset</button>
     </div>
   )
 }
