@@ -36,15 +36,15 @@ const Hangman = () => {
     ) {
       setIsWin(true)
     }
+    if (toGuessWord === "") {
+      setIsWin(false)
+    }
   }, [guessedLetters])
 
-  const checkHasWon = () => {
-    if (isWin) {
-      console.log("fitove karin")
-      setIsWin(false)
-      setToGuessWord(randomWord())
-      setGuessedLetters([])
-    }
+  const resetBtn = () => {
+    setIsWin(false)
+    setToGuessWord(randomWord())
+    setGuessedLetters([])
   }
   return (
     <div className="flex flex-col items-center">
@@ -59,7 +59,14 @@ const Hangman = () => {
       ) : (
         <div>loading...</div>
       )}
-      <button onClick={checkHasWon}>Reset</button>
+      <div className="flex flex-row items-center gap-5">
+        <button className="control-btn" onClick={resetBtn}>
+          Reset
+        </button>
+        <button className="control-btn" onClick={resetBtn}>
+          New Word
+        </button>
+      </div>
     </div>
   )
 }
