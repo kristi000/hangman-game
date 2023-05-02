@@ -9,12 +9,14 @@ type keyboardProps = {
   addGuessedLetter: (letter: string) => void
   incorrectLetters: string[]
   correctLetters: string[]
+  hasLost: boolean
 }
 
 const Keyboard = ({
   addGuessedLetter,
   correctLetters,
   incorrectLetters,
+  hasLost,
 }: keyboardProps) => {
   const handleLetterClick = (letter: string) => {
     console.log(letter)
@@ -22,14 +24,14 @@ const Keyboard = ({
   }
 
   return (
-    <div className="max-w-xl">
+    <div className="flex flex-col max-w-xl gap-1 my-3">
       {keyboardLetters.map((letter) => {
         return (
-          <div className="flex justify-center" key={Math.random()}>
+          <div className="flex justify-center gap-3" key={Math.random()}>
             {letter.map((letter) => {
               const isCorrect = correctLetters.includes(letter)
               const isIncorrect = incorrectLetters.includes(letter)
-              const isDisabled = isCorrect || isIncorrect
+              const isDisabled = isCorrect || isIncorrect || hasLost
               return (
                 <button
                   key={letter}
