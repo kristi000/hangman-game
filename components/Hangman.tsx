@@ -54,6 +54,22 @@ const Hangman = () => {
     setHaslost(false)
   }
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key
+      if (
+        !key.match(/^[a-z]$/) ||
+        incorrectLetters.length === 6 ||
+        guessedLetters.includes(key)
+      )
+        return
+
+      e.preventDefault()
+      setGuessedLetters([...guessedLetters, key])
+    }
+    document.addEventListener("keydown", handler)
+    return () => document.removeEventListener("keydown", handler)
+  }, [guessedLetters])
   return (
     <div className="flex flex-col items-center">
       <Word toGuessWord={toGuessWord} guessedLetters={guessedLetters} />
