@@ -83,12 +83,12 @@ const Hangman = () => {
         />
       ) : (
         <>
-          <div className="absolute w-screen h-screen bg-white" />
+          <div className="absolute w-screen h-screen bg-black" />
           <div className="flex flex-row absolute top-[50%] right-[50%] transform translate-x-[50%] -translate-y-[50%]  bg-white">
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="w-32 h-32 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                className="w-32 h-32 mr-2 text-gray-800 animate-spin dark:text-gray-600 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

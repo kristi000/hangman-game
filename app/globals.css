@@ -4,9 +4,9 @@
 
 @layer components {
   .keyboard-btn {
-    @apply bg-[#f2f2f2] uppercase border duration-100  text-black text-2xl  aspect-square w-10 rounded-md flex justify-center items-center;
+    @apply bg-gray-800 uppercase border duration-100  text-white text-2xl  aspect-square w-10 rounded-md flex justify-center items-center  hover:animate-[scale-1.1_1s_infinite];
   }
   .control-btn {
-    @apply bg-[#f2f2f2] border rounded-md flex-grow p-2;
+    @apply bg-gray-800 text-white border rounded-md flex-grow p-2;
   }
 }

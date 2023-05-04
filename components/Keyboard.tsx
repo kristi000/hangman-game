@@ -24,7 +24,7 @@ const Keyboard = ({
   }
 
   return (
-    <div className="flex flex-col max-w-xl gap-1 my-3">
+    <div className="flex flex-col max-w-xl gap-2 my-3">
       {keyboardLetters.map((letter) => {
         return (
           <div className="flex justify-center gap-3" key={Math.random()}>
@@ -36,7 +36,7 @@ const Keyboard = ({
                 <button
                   key={letter}
                   onClick={() => handleLetterClick(letter)}
-                  className={`keyboard-btn sdsdsanjdsdsds ${
+                  className={`keyboard-btn  ${
                     isDisabled ? "" : "active:scale-75"
                   }
                   ${isCorrect ? "bg-green-400" : ""}
