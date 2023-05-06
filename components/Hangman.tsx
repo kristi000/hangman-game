@@ -8,9 +8,9 @@ import words from "./wordList.json"
 const Hangman = () => {
   const [toGuessWord, setToGuessWord] = useState<string>("")
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
-  const [isWin, setIsWin] = useState<boolean>(false)
+  const [hasWon, setHasWon] = useState<boolean>(false)
   const [hasLost, setHaslost] = useState<boolean>(false)
-  console.log(isWin)
+  console.log(hasWon)
   function randomWord() {
     return words[Math.floor(Math.random() * words.length)]
   }
@@ -40,15 +40,15 @@ const Hangman = () => {
     if (
       toGuessWord.split("").every((letter) => correctLetters.includes(letter))
     ) {
-      setIsWin(true)
+      setHasWon(true)
     }
     if (toGuessWord === "") {
-      setIsWin(false)
+      setHasWon(false)
     }
   }, [guessedLetters])
 
   const resetBtn = () => {
-    setIsWin(false)
+    setHasWon(false)
     setToGuessWord(randomWord())
     setGuessedLetters([])
     setHaslost(false)
@@ -84,7 +84,7 @@ const Hangman = () => {
       ) : (
         <>
           <div className="absolute w-screen h-screen bg-black" />
-          <div className="flex flex-row absolute top-[50%] right-[50%] transform translate-x-[50%] -translate-y-[50%]  bg-white">
+          <div className="flex flex-row absolute top-[50%] right-[50%] transform translate-x-[50%] -translate-y-[50%]  bg-black">
             <div role="status">
               <svg
                 aria-hidden="true"
@@ -108,10 +108,16 @@ const Hangman = () => {
         </>
       )}
       <div className="flex items-center gap-5 justify-center w-full max-w-xl">
-        <button className="control-btn" onClick={resetBtn}>
+        <button
+          className={`control-btn ${hasLost ? "bg-red-600 custom-pulse" : ""}`}
+          onClick={resetBtn}
+        >
           Reset
         </button>
-        <button className="control-btn" onClick={resetBtn}>
+        <button
+          className={`control-btn ${hasWon ? "bg-green-400 custom-pulse" : ""}`}
+          onClick={resetBtn}
+        >
           New Word
         </button>
       </div>

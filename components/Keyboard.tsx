@@ -37,10 +37,12 @@ const Keyboard = ({
                   key={letter}
                   onClick={() => handleLetterClick(letter)}
                   className={`keyboard-btn  ${
-                    isDisabled ? "" : "active:scale-75"
+                    isDisabled
+                      ? "hover:border-none"
+                      : "active:scale-75 btn-hover"
                   }
                   ${isCorrect ? "bg-green-400" : ""}
-                  ${isIncorrect ? "bg-gray-500" : ""}
+                  ${isIncorrect ? "bg-red-600" : ""}
                   `}
                   disabled={isDisabled}
                 >
